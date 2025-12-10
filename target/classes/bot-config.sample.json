@@ -1,0 +1,9 @@
+
+{
+  "telegramToken": "123456789:ABC-xyz-seu-token-aqui",
+  "botUsername": "RafaMathBot",
+  "ollama": {
+    "baseUrl": "http://localhost:11434",
+    "model": "mistral"
+  }
+}

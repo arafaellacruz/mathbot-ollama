@@ -1,0 +1,9 @@
+
+{
+  "telegramToken": "8586013941:AAFXFSNOhx5BD8uZLO0PDwdTxBs_TbsFnC8",
+  "botUsername": "@MathOllamaBot",
+  "ollama": {
+    "baseUrl": "http://localhost:11434",
+    "model": "mistral"
+  }
+}

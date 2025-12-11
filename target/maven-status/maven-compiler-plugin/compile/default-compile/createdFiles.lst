@@ -1,7 +1,6 @@
 com/telegram/Config.class
-com/telegram/Config$Ollama.class
-com/telegram/OllamaClient$Message.class
+com/telegram/Config$OllamaConfig.class
 com/telegram/TelegramBot.class
 com/telegram/ChatMemory.class
 com/telegram/OllamaClient.class
-com/telegram/App.class
+com/telegram/Main.class

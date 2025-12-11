@@ -1,50 +1,73 @@
 package com.telegram;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections; // Importação adicionada
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Logger;
 
 public class ChatMemory {
-    private final Map<Long, List<OllamaClient.Message>> byChat = new ConcurrentHashMap<>();
-    private final int maxMessages = 20; // limita crescimento
+    
+    private static final Logger LOGGER = Logger.getLogger(ChatMemory.class.getName());
+    // Define o limite máximo de mensagens no histórico (5 pares user/assistant)
+    private static final int MAX_HISTORY_SIZE = 10; 
+    
+    // Usa ConcurrentHashMap para ser thread-safe
+    private final Map<Long, List<Map<String, String>>> conversations;
 
-    public List<OllamaClient.Message> getHistory(long chatId) {
-        return byChat.computeIfAbsent(chatId, k -> new ArrayList<>());
+    public ChatMemory() {
+        this.conversations = new ConcurrentHashMap<>();
+        LOGGER.info("✅ ChatMemory initialized");
     }
 
-    public void addUserMessage(long chatId, String text) {
-        List<OllamaClient.Message> history = getHistory(chatId);
-        history.add(new OllamaClient.Message("user", text));
-        trim(history);
+    /**
+     * Retorna o histórico de mensagens para um chatId específico.
+     * Retorna uma lista vazia e imutável se não houver histórico,
+     * para evitar NullPointerExceptions ou modificações indesejadas.
+     * @param chatId O ID do chat.
+     * @return Lista de mensagens (Map com "role" e "content").
+     */
+    public List<Map<String, String>> getHistory(Long chatId) {
+        // Usa getOrDefault para retornar uma lista vazia se o chat não existir,
+        // garantindo que o OllamaClient receba algo válido.
+        return conversations.getOrDefault(chatId, Collections.emptyList());
     }
 
-    public void addAssistantMessage(long chatId, String text) {
-        List<OllamaClient.Message> history = getHistory(chatId);
-        history.add(new OllamaClient.Message("assistant", text));
-        trim(history);
-    }
-
-    public void reset(long chatId) {
-        byChat.remove(chatId);
-    }
-
-    public void ensureSystemPrompt(long chatId, String prompt) {
-        List<OllamaClient.Message> history = getHistory(chatId);
-        if (history.stream().noneMatch(m -> "system".equals(m.role))) {
-            history.add(0, new OllamaClient.Message("system", prompt));
+    /**
+     * Adiciona uma nova mensagem ao histórico do chat e aplica o limite de tamanho.
+     * @param chatId O ID do chat.
+     * @param role O papel na conversa ("user" ou "assistant").
+     * @param content O conteúdo da mensagem.
+     */
+    public void addMessage(Long chatId, String role, String content) {
+        // Usa computeIfAbsent para obter a lista ou criar uma nova se não existir,
+        // garantindo thread-safety. (Um ArrayList normal já funciona bem com ConcurrentHashMap).
+        List<Map<String, String>> history = conversations.computeIfAbsent(
+            chatId, 
+            k -> new ArrayList<>()
+        );
+        
+        Map<String, String> message = new HashMap<>();
+        message.put("role", role);
+        message.put("content", content);
+        
+        history.add(message);
+        
+        // Mantém o histórico com um tamanho máximo, removendo mensagens mais antigas (FIFO).
+        if (history.size() > MAX_HISTORY_SIZE) {
+            // Remove a mensagem mais antiga (índice 0)
+            history.remove(0);
         }
     }
 
-    private void trim(List<OllamaClient.Message> history) {
-        // preserva a primeira (system), remove as mais antigas do meio
-        int max = maxMessages;
-        if (history.size() > max) {
-            // mantém índice 0 (system) e as últimas (recentes)
-            List<OllamaClient.Message> keep = new ArrayList<>();
-            keep.add(history.get(0));
-            int start = Math.max(1, history.size() - (max - 1));
-            keep.addAll(history.subList(start, history.size()));
-            history.clear();
-            history.addAll(keep);
-        }
+    /**
+     * Limpa o histórico de conversas para um chat específico.
+     * @param chatId O ID do chat.
+     */
+    public void clearHistory(Long chatId) {
+        conversations.remove(chatId);
+        LOGGER.info("🧹 Cleared history for chat: " + chatId);
     }
 }

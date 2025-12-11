@@ -1,7 +1,7 @@
 
 {
   "telegramToken": "1234564897454125312312312154564",
-  "botUsername": "@MathOllamaBot",
+  "botUsername": "@BotName",
   "ollama": {
     "baseUrl": "http://localhost:11434",
     "model": "mistral"

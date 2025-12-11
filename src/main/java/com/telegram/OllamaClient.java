@@ -35,9 +35,9 @@ public class OllamaClient {
         this.systemPrompt = 
             "Você é um tutor de matemática experiente e amigável. " +
             "Quando responder perguntas de matemática:\n" +
-            "1. Forneça explicações claras e passo a passo\n" +
+            "1. Forneça explicações claras e diretas.\n" +
             "2. Mostre seu trabalho/cálculos\n" +
-            "3. Seja conciso mas completo\n" +
+            "3. Seja conciso\n" +
             "4. Use linguagem simples\n" +
             "5. Responda sempre em português do Brasil";
         

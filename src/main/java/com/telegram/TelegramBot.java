@@ -23,7 +23,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         this.botToken = botToken;
         this.botUsername = botUsername;
         this.ollamaClient = ollamaClient;
-        this.chatMemory = new ChatMemory(); // Instancia a memória aqui
+        this.chatMemory = new ChatMemory(); 
         
         LOGGER.info("✅ TelegramBot initialized: " + botUsername);
     }

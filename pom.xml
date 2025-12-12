@@ -15,19 +15,12 @@
       <maven.compiler.release>17</maven.compiler.release>
     </properties>
 
-
-
     <dependencies>
-
-        <!-- Telegram Bots -->
         <dependency>
             <groupId>org.telegram</groupId>
             <artifactId>telegrambots</artifactId>
             <version>6.9.7.0</version>
         </dependency>
-
-        <!-- Jackson -->
-        
         <dependency>
           <groupId>com.fasterxml.jackson.core</groupId>
           <artifactId>jackson-annotations</artifactId>
@@ -43,22 +36,16 @@
           <artifactId>jackson-databind</artifactId>
           <version>2.17.0</version>
         </dependency>
-
-
-        <!-- JUnit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
-
-            <!-- Compilador -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -68,8 +55,6 @@
                     <target>17</target>
                 </configuration>
             </plugin>
-
-            <!-- FAT JAR com dependências -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>

@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@JsonIgnoreProperties(ignoreUnknown = true) // segurança extra
+@JsonIgnoreProperties(ignoreUnknown = true) 
 public class Config {
 
     private static final Logger LOGGER = Logger.getLogger(Config.class.getName());
@@ -24,8 +24,8 @@ public class Config {
         private String baseUrl;
         private String model;
 
-        public OllamaConfig() {} // Jackson precisa do construtor default
-
+        public OllamaConfig() {} 
+        
         public String getBaseUrl() { return baseUrl; }
         public String getModel()    { return model; }
 

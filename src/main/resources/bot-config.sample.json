@@ -4,6 +4,6 @@
   "botUsername": "@BotName",
   "ollama": {
     "baseUrl": "http://localhost:11434",
-    "model": "mistral"
+    "model": "qwen3:0.6b"
   }
 }

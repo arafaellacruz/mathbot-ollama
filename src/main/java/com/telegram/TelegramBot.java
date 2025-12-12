@@ -71,7 +71,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                 case "/start":
                     sendMessage(chatId, 
                         "🤖 *Olá! Sou o MathBot*\n\n" +
-                        "Envie sua pergunta de matemática!\n\n" +
+                        "Envie perguntas sobre matemática, mas também sei sobre ciência, história, produtividade, escrita, entre outras coisas.\n\n" +
                         "*Comandos:*\n" +
                         "/start - Iniciar\n" +
                         "/clear - Limpar histórico\n" +

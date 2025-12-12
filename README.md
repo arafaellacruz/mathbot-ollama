@@ -60,7 +60,7 @@ src/
   ```bash
   ollama serve
   # modelos sugeridos:
-  ollama pull mistral
+  ollama pull qwen3:0.6b
   # ou, melhor qualidade:
   ollama pull llama3.1:8b
   ```
@@ -84,7 +84,7 @@ Há **três formas** de configurar o token/nome do bot e o modelo do Ollama:
   "botUsername": "MathBot",
   "ollama": {
     "baseUrl": "http://localhost:11434",
-    "model": "mistral"
+    "model": "qwen3:0.6b"
   }
 }
 ```
@@ -97,23 +97,23 @@ Há **três formas** de configurar o token/nome do bot e o modelo do Ollama:
 `src/main/resources/bot-config.properties`:
 ```properties
 telegram.token=SEU_TOKEN_AQUI
-telegram.username=MathBot
+telegram.username=NOME_DO_SEU_BOT
 ollama.baseUrl=http://localhost:11434
-ollama.model=mistral
+ollama.model=qwen3:0.6b
 ```
 
 ### 3) Variáveis de ambiente (opcional)
 ```bash
 # Linux/macOS
 export TELEGRAM_BOT_TOKEN="SEU_TOKEN"
-export TELEGRAM_BOT_USERNAME="MathBot"
-export OLLAMA_MODEL="mistral"
+export TELEGRAM_BOT_USERNAME="NOME_DO_SEU_BOT"
+export OLLAMA_MODEL="qwen3:0.6b"
 ```
 ```powershell
 # Windows PowerShell
 $env:TELEGRAM_BOT_TOKEN="SEU_TOKEN"
-$env:TELEGRAM_BOT_USERNAME="MathBot"
-$env:OLLAMA_MODEL="mistral"
+$env:TELEGRAM_BOT_USERNAME="NOME_DO_SEU_BOT"
+$env:OLLAMA_MODEL="qwen3:0.6b"
 ```
 
 > Você pode **sobrepor** o arquivo de config com `-Dconfig`:

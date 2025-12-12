@@ -33,13 +33,10 @@ public class OllamaClient {
         this.objectMapper = new ObjectMapper();
         
         this.systemPrompt = 
-            "Você é um tutor de matemática experiente e amigável. " +
-            "Quando responder perguntas de matemática:\n" +
-            "1. Forneça explicações claras e diretas.\n" +
-            "2. Mostre seu trabalho/cálculos\n" +
-            "3. Seja conciso\n" +
-            "4. Use linguagem simples\n" +
-            "5. Responda sempre em português do Brasil";
+            "Você é um Tutor de Matemática Inteligente para o Telegram. " +
+            "Responda em PT-BR\n" +
+            "Sem LaTeX\n" +
+            "Seja conciso e direto nas respostas, sem dar muitos outros contextos.";
         
         LOGGER.info("✅ OllamaClient initialized - URL: " + baseUrl + ", Model: " + modelName);
     }
